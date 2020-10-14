@@ -28,7 +28,49 @@
     </div>
   </div>
   <script>
-    // Get your language here https://datatables.net/examples/advanced_init/language_file.html
+    var dt_options = {
+        withButtons: true,
+        scrollCollapse: true,
+        scrollY: '70vh',
+        language: {
+          url: "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"  // Get your language here https://datatables.net/examples/advanced_init/language_file.html
+        },
+        order: [0, 'desc']
+      };
+    
+    var dt_ajax = {
+        url: "my_web_service",
+        type: "GET",
+        data: {
+          id: relevant_data
+        },
+        dataSrc: 'item'
+      };
+    
+    var dt_columns = [
+       { data: "id" },
+       { data: "name" },
+       { data: "age" },
+       { data: "city" },
+       { data: "address" },
+       { data: "country" },
+       { data: "postcode" },
+       { data: "phone" },
+    ];
+    
+    var dt_definitions = [
+      {
+          targets: 1, //the same order of your columns
+          render: function (data, type, row) {
+            var out = '';
+            for(var x = 0; x < data.length; x++) {
+              out += (x==0) ? data[x].toUpperCase() : data[x];
+            }
+            return out;
+          }
+        }
+    ]
+   
   </script>
   <script src="./js/DataTableJS.js"></script>
   <script src="./js/DTLegend.js"></script>
